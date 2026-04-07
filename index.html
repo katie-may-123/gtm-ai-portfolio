@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katie — Automation Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --text-primary: #1A1916;
+    --text-secondary: #6B6860;
+    --text-muted: #A8A59F;
+    --accent: #1D6B4A;
+    --accent-light: #E4F0EB;
+    --border: rgba(26,25,22,0.1);
+    --border-strong: rgba(26,25,22,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .wrapper { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Nav */
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.25rem 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    color: var(--text-primary);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+
+  /* Hero */
+  .hero {
+    padding: 5rem 0 4rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .hero-headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.1;
+    color: var(--text-primary);
+    max-width: 660px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-body {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 3rem 0 1.5rem;
+  }
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+  }
+  .section-count {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Project grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 4rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-right: 1px solid var(--border-strong);
+    border-bottom: 1px solid var(--border-strong);
+    transition: background 0.18s;
+    min-height: 210px;
+  }
+  .project-card:hover { background: #FAFAF8; }
+
+  .project-card.placeholder {
+    background: var(--bg);
+    cursor: default;
+    border-right: none;
+  }
+  .project-card.placeholder:hover { background: var(--bg); }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .card-number {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .card-status {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .status-live { background: var(--accent-light); color: var(--accent); }
+  .status-soon { background: #F3F3F1; color: var(--text-muted); }
+
+  .card-category {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .card-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px;
+    line-height: 1.25;
+    color: var(--text-primary);
+  }
+  .card-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 0.5px solid var(--border);
+    margin-top: auto;
+  }
+  .card-tools {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .tool-tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--text-muted);
+    border: 0.5px solid var(--border-strong);
+  }
+  .card-arrow {
+    font-size: 15px;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+  .project-card:not(.placeholder):hover .card-arrow {
+    transform: translate(3px, -3px);
+    color: var(--accent);
+  }
+
+  /* About strip */
+  .about-strip {
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 3rem 0;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: start;
+  }
+  .about-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    padding-top: 4px;
+  }
+  .about-text {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+  .about-text strong { font-weight: 500; color: var(--text-primary); }
+
+  /* Footer */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+  .footer-note {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-headline { animation: fadeUp 0.45s ease both 0.05s; }
+  .hero-body     { animation: fadeUp 0.45s ease both 0.12s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 0 2.5rem; }
+    .about-strip { grid-template-columns: 1fr; gap: 0.75rem; }
+    .nav-links { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrapper nav-inner">
+    <span class="nav-name">Katie</span>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <h1 class="hero-headline">Building a better <em>GTM stack.</em></h1>
+    <p class="hero-body">A collection of automations built to eliminate the manual overhead of enterprise sales. Less time on admin, more time in front of customers.</p>
+  </section>
+
+  <div id="projects">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+      <span class="section-count">More coming soon</span>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 01: Live -->
+      <a class="project-card" href="project-01/index.html">
+        <div class="card-top">
+          <span class="card-number">01</span>
+          <span class="card-status status-live">Live</span>
+        </div>
+        <div>
+          <div class="card-category">Sales operations</div>
+          <div class="card-title">Automated opportunity documentation</div>
+        </div>
+        <p class="card-desc">Turns Granola meeting transcripts into fully populated Salesforce opportunity briefs, including the discovery capture sheet and 3 Why's, in seconds.</p>
+        <div class="card-footer">
+          <div class="card-tools">
+            <span class="tool-tag">Granola API</span>
+            <span class="tool-tag">Claude skill</span>
+            <span class="tool-tag">Word doc</span>
+          </div>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- Placeholder 02 -->
+      <div class="project-card placeholder">
+        <div class="card-top">
+          <span class="card-number">02</span>
+          <span class="card-status status-soon">Coming soon</span>
+        </div>
+        <div>
+          <div class="card-category" style="color: var(--text-muted);">Prospecting</div>
+          <div class="card-title" style="color: var(--text-muted);">AI-powered prospect research</div>
+        </div>
+        <p class="card-desc" style="color: var(--text-muted);">This space will fill as new projects go live.</p>
+        <div class="card-footer"><div class="card-tools"></div></div>
+      </div>
+
+      <!-- Placeholder 03 -->
+      <div class="project-card placeholder">
+        <div class="card-top">
+          <span class="card-number">03</span>
+          <span class="card-status status-soon">Coming soon</span>
+        </div>
+        <div>
+          <div class="card-category" style="color: var(--text-muted);">Outreach</div>
+          <div class="card-title" style="color: var(--text-muted);">Personalized outreach drafting</div>
+        </div>
+        <p class="card-desc" style="color: var(--text-muted);">This space will fill as new projects go live.</p>
+        <div class="card-footer"><div class="card-tools"></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="about" class="about-strip">
+    <div class="about-label">About</div>
+    <p class="about-text">
+      I'm an enterprise sales rep at a large database company covering financial services accounts. These automations were built to solve real problems in my day-to-day workflow.
+    </p>
+  </div>
+
+</div>
+
+<div class="wrapper">
+  <footer>
+    <span class="footer-name">Katie</span>
+    <span class="footer-note">Built with Claude · Updated April 2026</span>
+  </footer>
+</div>
+
+</body>
+</html>
