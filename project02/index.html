@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automated Lead List Builder — Katie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --text-primary: #1A1916;
+    --text-secondary: #6B6860;
+    --text-muted: #A8A59F;
+    --accent: #1D6B4A;
+    --accent-light: #E4F0EB;
+    --border: rgba(26,25,22,0.1);
+    --border-strong: rgba(26,25,22,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .wrapper { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Nav */
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.25rem 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .nav-name { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--text-primary); text-decoration: none; }
+  .nav-back { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--text-primary); }
+
+  /* Hero */
+  .hero { padding: 5rem 0 3.5rem; border-bottom: 0.5px solid var(--border); }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 5vw, 48px); line-height: 1.1; color: var(--text-primary); margin-bottom: 0.75rem; }
+  .hero-subtitle { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.65; max-width: 560px; margin-bottom: 2rem; }
+
+  .meta-row { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 3px; }
+  .meta-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .meta-value { font-size: 13px; color: var(--text-primary); }
+
+  .divider { height: 0.5px; background: var(--border); margin: 2.5rem 0; }
+
+  /* Sections */
+  .section { margin-bottom: 2.5rem; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border); }
+  .section-label.problem { color: #D85A30; }
+  .section-label.solution { color: #185FA5; }
+  .section-label.impact { color: #3B6D11; }
+  .section-label.future { color: #7F77DD; }
+  .section-label.muted { color: var(--text-muted); }
+
+  .body-text { font-size: 15px; color: var(--text-primary); line-height: 1.75; }
+
+  /* Steps */
+  .step-list { display: flex; flex-direction: column; gap: 14px; margin-top: 0.5rem; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #E6F1FB; color: #185FA5; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+  .step-text { font-size: 15px; color: var(--text-primary); line-height: 1.65; }
+  .step-text strong { font-weight: 500; }
+
+  /* Scoring table */
+  .scoring-block { margin-top: 0.75rem; border: 0.5px solid var(--border-strong); border-radius: 10px; overflow: hidden; }
+  .scoring-header { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 9px 14px; background: var(--text-primary); }
+  .scoring-header span { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.06em; }
+  .scoring-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 9px 14px; border-bottom: 0.5px solid var(--border); align-items: center; background: var(--surface); }
+  .scoring-row:last-child { border-bottom: none; }
+  .scoring-row.group-header { background: var(--bg); }
+  .scoring-row.group-header .signal { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .signal { font-size: 13px; color: var(--text-primary); }
+  .points { font-size: 13px; font-weight: 500; color: var(--accent); white-space: nowrap; }
+  .points.na { color: #D85A30; }
+
+  /* Tier badges */
+  .tier-grid { display: flex; gap: 10px; margin-top: 0.75rem; flex-wrap: wrap; }
+  .tier-badge { padding: 10px 16px; border-radius: var(--border-radius-md, 8px); flex: 1; min-width: 140px; }
+  .tier-a { background: #1B4332; }
+  .tier-a .tier-label { color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .tier-a .tier-desc { color: #FFFFFF; font-size: 13px; line-height: 1.5; }
+  .tier-b { background: #D8F3DC; }
+  .tier-b .tier-label { color: #1B4332; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .tier-b .tier-desc { color: #1B4332; font-size: 13px; line-height: 1.5; }
+  .tier-c { background: #DBEAFE; }
+  .tier-c .tier-label { color: #1E3A5F; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .tier-c .tier-desc { color: #1E3A5F; font-size: 13px; line-height: 1.5; }
+
+  /* Sample output preview */
+  .artifact-preview { border: 0.5px solid var(--border-strong); border-radius: 10px; overflow: hidden; margin-top: 0.75rem; }
+  .artifact-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
+  .artifact-filename { font-size: 12px; font-weight: 500; color: var(--text-secondary); font-family: 'SF Mono', 'Fira Code', monospace; }
+  .artifact-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+  .artifact-row { display: flex; gap: 12px; padding: 9px 14px; border-bottom: 0.5px solid var(--border); align-items: baseline; }
+  .artifact-row:last-child { border-bottom: none; }
+  .row-field { font-size: 12px; font-weight: 500; color: var(--text-muted); min-width: 160px; flex-shrink: 0; }
+  .row-value { font-size: 12px; color: var(--text-primary); line-height: 1.5; }
+
+  /* Impact cards */
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 0.5rem; }
+  .impact-card { background: var(--bg); border-radius: 8px; padding: 1rem 1.1rem; }
+  .impact-icon { font-size: 18px; margin-bottom: 8px; }
+  .impact-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .impact-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* Future items */
+  .future-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
+  .future-item { display: flex; gap: 14px; padding: 13px 15px; border: 0.5px solid var(--border); border-radius: 10px; background: var(--surface); }
+  .future-badge { flex-shrink: 0; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px; height: fit-content; margin-top: 2px; white-space: nowrap; }
+  .badge-soon { background: var(--accent-light); color: var(--accent); }
+  .badge-idea { background: #EEEDFE; color: #534AB7; }
+  .future-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .future-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* Footer */
+  footer { border-top: 0.5px solid var(--border); padding: 2rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+  .footer-name { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--text-secondary); }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.45s ease both 0.05s; }
+  .hero-title    { animation: fadeUp 0.45s ease both 0.12s; }
+  .hero-subtitle { animation: fadeUp 0.45s ease both 0.2s; }
+  .meta-row      { animation: fadeUp 0.45s ease both 0.28s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 0 2.5rem; }
+    .artifact-row { flex-direction: column; gap: 2px; }
+    .row-field { min-width: unset; }
+    .tier-grid { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="nav-name" href="../index.html">Katie</a>
+    <a class="nav-back" href="../index.html">← All projects</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <p class="hero-eyebrow">Prospecting · Sales operations</p>
+    <h1 class="hero-title">Automated lead list builder</h1>
+    <p class="hero-subtitle">From a rep typing an account name and ICP to a scored, enriched, ready-to-sequence lead list — in under a minute.</p>
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-label">Built with</span><span class="meta-value">ZoomInfo API · Claude skill · Web search</span></div>
+      <div class="meta-item"><span class="meta-label">Output</span><span class="meta-value">Excel workbook or CSV</span></div>
+      <div class="meta-item"><span class="meta-label">First run</span><span class="meta-value">April 10, 2026</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label problem">Problem</div>
+    <p class="body-text">Building a quality prospect list manually is one of the most time-consuming tasks in a sales rep's week. Reading through LinkedIn profiles, identifying the right contacts, enriching them with emails and phone numbers, researching company signals to make outreach relevant, and then uploading everything into a sequencing tool can take hours per account. And even after all that work, the list is often incomplete, inconsistently scored, and missing the context that would make outreach actually land.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label solution">Solution</div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Structured intake.</strong> The skill opens with a short set of questions: account name, number of targets, job function, seniority level, any additional filters, and whether the rep wants an Excel file (to work from) or a CSV (to upload to a sequence tool like SalesLoft). All in one message, no back-and-forth.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>ZoomInfo contact sourcing.</strong> The skill queries ZoomInfo for contacts matching the ICP — pulling name, title, seniority, email, phone, LinkedIn URL, and department. Invalid roles are filtered out before scoring: Site Reliability Engineering, Frontend, UX, and Mobile titles are automatically excluded as non-buyers for the database infrastructure use case.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Web search enrichment.</strong> Two rounds of research run in parallel — company-level signals (AI initiatives, hiring, funding, strategic announcements) applied to all contacts, and contact-level signals (new to role, published content, public AI/data commentary) applied individually to the highest-priority targets first.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Custom scoring logic.</strong> Each contact receives a 1-10 score using a defined, transparent model that weighs seniority, recency in role, AI/ML in title, and both contact and company signals. The scoring flips into ICP override mode when the rep specifies a narrow seniority band, so signals become the primary differentiator within the tier.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Formatted output.</strong> Contacts are sorted by score and delivered either as a color-coded Excel workbook (one tab per account, summary sheet, dropdown status tracking) or a flat CSV formatted for direct SalesLoft import.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Scoring model</div>
+    <div class="scoring-block">
+      <div class="scoring-header">
+        <span>Signal</span>
+        <span>Points</span>
+      </div>
+      <div class="scoring-row group-header"><span class="signal">Seniority</span><span></span></div>
+      <div class="scoring-row"><span class="signal">C-suite / SVP / EVP</span><span class="points">+4</span></div>
+      <div class="scoring-row"><span class="signal">VP</span><span class="points">+3</span></div>
+      <div class="scoring-row"><span class="signal">Director</span><span class="points">+2</span></div>
+      <div class="scoring-row"><span class="signal">Manager</span><span class="points">+1</span></div>
+      <div class="scoring-row"><span class="signal">Individual contributor</span><span class="points">+0</span></div>
+      <div class="scoring-row group-header"><span class="signal">Signals</span><span></span></div>
+      <div class="scoring-row"><span class="signal">AI / ML / GenAI keyword in title</span><span class="points">+1</span></div>
+      <div class="scoring-row"><span class="signal">New to role in last 6 months</span><span class="points">+1</span></div>
+      <div class="scoring-row"><span class="signal">Contact-level AI/data signal detected</span><span class="points">+2</span></div>
+      <div class="scoring-row"><span class="signal">Company-level AI/data/hiring signal</span><span class="points">+1</span></div>
+      <div class="scoring-row group-header"><span class="signal">N/A filter (excluded before scoring)</span><span></span></div>
+      <div class="scoring-row"><span class="signal">Site Reliability / SRE / Frontend / UX / Mobile Engineering</span><span class="points na">removed</span></div>
+    </div>
+
+    <div class="tier-grid" style="margin-top: 1rem;">
+      <div class="tier-badge tier-a">
+        <div class="tier-label">Tier A · 8-10</div>
+        <div class="tier-desc">Highest priority. Multiple strong signals — new to role, AI mandate, or explicit data platform ownership.</div>
+      </div>
+      <div class="tier-badge tier-b">
+        <div class="tier-label">Tier B · 6-7</div>
+        <div class="tier-desc">Strong target. Right seniority and function, at least one differentiating signal detected.</div>
+      </div>
+      <div class="tier-badge tier-c">
+        <div class="tier-label">Tier C · 4-5</div>
+        <div class="tier-desc">Good target. Matches ICP, worth reaching out. Fewer signals detected but still relevant.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Sample output — Moody's, Directors and VPs of Software Engineering</div>
+    <div class="artifact-preview">
+      <div class="artifact-header">
+        <span class="artifact-filename">lead_list_Moodys_2026-04-10.xlsx</span>
+        <span class="artifact-badge">48 contacts</span>
+      </div>
+      <div class="artifact-row"><span class="row-field">ICP</span><span class="row-value">Directors and VPs of Software / Systems / Data Engineering</span></div>
+      <div class="artifact-row"><span class="row-field">Tier A</span><span class="row-value">3 contacts — new to role within 6 months, or explicit ML/data platform mandate</span></div>
+      <div class="artifact-row"><span class="row-field">Tier B</span><span class="row-value">24 contacts — VP/Director level with detectable signals (active GitHub, AI title, data mandate)</span></div>
+      <div class="artifact-row"><span class="row-field">Tier C</span><span class="row-value">21 contacts — same ICP, worth outreach, fewer differentiating signals found</span></div>
+      <div class="artifact-row"><span class="row-field">Excluded</span><span class="row-value">1 contact removed by N/A filter (Site Reliability Engineering)</span></div>
+      <div class="artifact-row"><span class="row-field">Contact info</span><span class="row-value">Email, phone, and LinkedIn sourced from ZoomInfo where available</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label impact">Impact</div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">⏱</div>
+        <div class="impact-title">Hours saved per account</div>
+        <div class="impact-desc">What used to take 2 to 4 hours of manual LinkedIn research, enrichment, and list building now takes under a minute.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🎯</div>
+        <div class="impact-title">Built-in prioritization</div>
+        <div class="impact-desc">Every contact is scored before the rep sees it. No more guessing who to call first — Tier A contacts float to the top automatically.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">📋</div>
+        <div class="impact-title">Sequence-ready output</div>
+        <div class="impact-desc">One click exports a CSV formatted for SalesLoft import, or a full Excel workbook with status tracking built in.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🔍</div>
+        <div class="impact-title">Signal-aware outreach</div>
+        <div class="impact-desc">Every contact includes a plain-English rationale explaining their score — so the rep knows the hook before they write a single word.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label future">How we could continue building on this</div>
+    <div class="future-grid">
+      <div class="future-item">
+        <span class="future-badge badge-soon">Next up</span>
+        <div>
+          <div class="future-title">Automated outreach drafting per contact</div>
+          <div class="future-desc">Take the score rationale column and automatically generate a personalized cold email and LinkedIn message for each Tier A and B contact, grounded in their specific signals.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-soon">Next up</span>
+        <div>
+          <div class="future-title">Direct SalesLoft push via API</div>
+          <div class="future-desc">Skip the CSV download entirely. Once a list is generated and reviewed, push contacts directly into a SalesLoft cadence with one confirmation step.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">ICP customization per company</div>
+          <div class="future-desc">Right now the N/A filter and scoring weights are tuned for a database infrastructure use case. Building company-specific ICP profiles would let any seller use this without manual configuration.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">More granular scoring signals</div>
+          <div class="future-desc">Incorporate intent data (6sense, Bombora), recent job postings at the account, tech stack signals from ZoomInfo, and LinkedIn activity recency to push score differentiation beyond what web search can detect.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">Automated re-scoring on role changes</div>
+          <div class="future-desc">Run a weekly job that detects when contacts on an existing list have changed roles, then resurface them as new Tier A targets with a "new to role" flag.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrapper">
+  <footer>
+    <span class="footer-name">Katie</span>
+    <span class="footer-note">Built with Claude · Updated April 2026</span>
+  </footer>
+</div>
+
+</body>
+</html>
