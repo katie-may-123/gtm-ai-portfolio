@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Katie — Automation Portfolio</title>
+<title>Katie May — Automation Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
@@ -127,7 +127,7 @@
   /* Project grid */
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     border: 1px solid var(--border-strong);
     border-radius: 12px;
     overflow: hidden;
@@ -174,6 +174,7 @@
     border-radius: 20px;
   }
   .status-live { background: var(--accent-light); color: var(--accent); }
+  .status-building { background: #FEF3C7; color: #92400E; }
   .status-soon { background: #F3F3F1; color: var(--text-muted); }
 
   .card-category {
@@ -296,7 +297,7 @@
 
 <nav>
   <div class="wrapper nav-inner">
-    <span class="nav-name">Katie</span>
+    <span class="nav-name">Katie May</span>
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
       <li><a href="#about">About</a></li>
@@ -361,18 +362,99 @@
         </div>
       </a>
 
-      <!-- Placeholder 03 -->
+      <!-- Project 03: In progress -->
       <div class="project-card placeholder">
         <div class="card-top">
           <span class="card-number">03</span>
-          <span class="card-status status-soon">Coming soon</span>
+          <span class="card-status status-building">Building</span>
         </div>
         <div>
-          <div class="card-category" style="color: var(--text-muted);">Outreach</div>
-          <div class="card-title" style="color: var(--text-muted);">Personalized outreach drafting</div>
+          <div class="card-category" style="color: var(--text-secondary);">Outreach</div>
+          <div class="card-title" style="color: var(--text-secondary);">Personalized outreach drafting</div>
         </div>
-        <p class="card-desc" style="color: var(--text-muted);">This space will fill as new projects go live.</p>
-        <div class="card-footer"><div class="card-tools"></div></div>
+        <p class="card-desc" style="color: var(--text-muted);">Takes a contact and their signals and generates a cold email and LinkedIn message grounded in something real, not a template.</p>
+        <div class="card-footer">
+          <div class="card-tools">
+            <span class="tool-tag">Claude skill</span>
+            <span class="tool-tag">Gmail</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 04: Planned -->
+      <div class="project-card placeholder">
+        <div class="card-top">
+          <span class="card-number">04</span>
+          <span class="card-status status-soon">Planned</span>
+        </div>
+        <div>
+          <div class="card-category" style="color: var(--text-muted);">Deal management</div>
+          <div class="card-title" style="color: var(--text-muted);">Pre-meeting prep brief</div>
+        </div>
+        <p class="card-desc" style="color: var(--text-muted);">Before every customer call, synthesize prior Granola notes and signals into a one-page brief covering open questions and recommended topics.</p>
+        <div class="card-footer">
+          <div class="card-tools">
+            <span class="tool-tag">Granola API</span>
+            <span class="tool-tag">Claude skill</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 05: Planned -->
+      <div class="project-card placeholder">
+        <div class="card-top">
+          <span class="card-number">05</span>
+          <span class="card-status status-soon">Planned</span>
+        </div>
+        <div>
+          <div class="card-category" style="color: var(--text-muted);">Pipeline</div>
+          <div class="card-title" style="color: var(--text-muted);">Account health tracker</div>
+        </div>
+        <p class="card-desc" style="color: var(--text-muted);">Synthesizes all meetings for an opportunity over time and surfaces what has changed, what is still unknown, and what the recommended next action is.</p>
+        <div class="card-footer">
+          <div class="card-tools">
+            <span class="tool-tag">Granola API</span>
+            <span class="tool-tag">Salesforce</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 06: Planned -->
+      <div class="project-card placeholder">
+        <div class="card-top">
+          <span class="card-number">06</span>
+          <span class="card-status status-soon">Planned</span>
+        </div>
+        <div>
+          <div class="card-category" style="color: var(--text-muted);">Enablement</div>
+          <div class="card-title" style="color: var(--text-muted);">Competitive battlecard generator</div>
+        </div>
+        <p class="card-desc" style="color: var(--text-muted);">Feeds in a competitor name and generates an up-to-date battlecard with objection handlers, landmines, and recent product news.</p>
+        <div class="card-footer">
+          <div class="card-tools">
+            <span class="tool-tag">Web search</span>
+            <span class="tool-tag">Claude skill</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 07: Planned -->
+      <div class="project-card placeholder">
+        <div class="card-top">
+          <span class="card-number">07</span>
+          <span class="card-status status-soon">Planned</span>
+        </div>
+        <div>
+          <div class="card-category" style="color: var(--text-muted);">CRM</div>
+          <div class="card-title" style="color: var(--text-muted);">CRM hygiene automation</div>
+        </div>
+        <p class="card-desc" style="color: var(--text-muted);">Scans for incomplete Salesforce fields, flags stale opportunities, and auto-populates missing data from meeting notes.</p>
+        <div class="card-footer">
+          <div class="card-tools">
+            <span class="tool-tag">Salesforce</span>
+            <span class="tool-tag">Granola API</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -389,7 +471,7 @@
 
 <div class="wrapper">
   <footer>
-    <span class="footer-name">Katie</span>
+    <span class="footer-name">Katie May</span>
     <span class="footer-note">Built with Claude · Updated April 2026</span>
   </footer>
 </div>
