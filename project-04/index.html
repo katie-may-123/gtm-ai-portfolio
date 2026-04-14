@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Meeting Prep Brief — Katie May</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --text-primary: #1A1916;
+    --text-secondary: #6B6860;
+    --text-muted: #A8A59F;
+    --accent: #1D6B4A;
+    --accent-light: #E4F0EB;
+    --border: rgba(26,25,22,0.1);
+    --border-strong: rgba(26,25,22,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .wrapper { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Nav */
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.25rem 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .nav-name { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--text-primary); text-decoration: none; }
+  .nav-back { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--text-primary); }
+
+  /* Hero */
+  .hero { padding: 5rem 0 3.5rem; border-bottom: 0.5px solid var(--border); }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 5vw, 48px); line-height: 1.1; color: var(--text-primary); margin-bottom: 0.75rem; }
+  .hero-subtitle { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.65; max-width: 560px; margin-bottom: 2rem; }
+
+  .meta-row { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 3px; }
+  .meta-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .meta-value { font-size: 13px; color: var(--text-primary); }
+
+  .divider { height: 0.5px; background: var(--border); margin: 2.5rem 0; }
+
+  /* Sections */
+  .section { margin-bottom: 2.5rem; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border); }
+  .section-label.problem { color: #D85A30; }
+  .section-label.solution { color: #185FA5; }
+  .section-label.impact { color: #3B6D11; }
+  .section-label.future { color: #7F77DD; }
+  .section-label.muted { color: var(--text-muted); }
+
+  .body-text { font-size: 15px; color: var(--text-primary); line-height: 1.75; }
+
+  /* Steps */
+  .step-list { display: flex; flex-direction: column; gap: 14px; margin-top: 0.5rem; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #E6F1FB; color: #185FA5; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+  .step-text { font-size: 15px; color: var(--text-primary); line-height: 1.65; }
+  .step-text strong { font-weight: 500; }
+
+  /* Sources block */
+  .sources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 0.75rem; }
+  .source-card { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 8px; padding: 0.9rem 1rem; }
+  .source-icon { font-size: 16px; margin-bottom: 6px; }
+  .source-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .source-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* Doc structure preview */
+  .doc-preview { border: 0.5px solid var(--border-strong); border-radius: 10px; overflow: hidden; margin-top: 0.75rem; }
+  .doc-preview-header { padding: 10px 14px; background: var(--text-primary); display: flex; align-items: center; justify-content: space-between; }
+  .doc-preview-title { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.8); font-family: 'SF Mono', 'Fira Code', monospace; }
+  .doc-preview-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+  .doc-section { display: flex; gap: 12px; padding: 9px 14px; border-bottom: 0.5px solid var(--border); align-items: baseline; background: var(--surface); }
+  .doc-section:last-child { border-bottom: none; }
+  .doc-section-name { font-size: 12px; font-weight: 500; color: var(--accent); min-width: 180px; flex-shrink: 0; }
+  .doc-section-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* Sample output preview */
+  .artifact-preview { border: 0.5px solid var(--border-strong); border-radius: 10px; overflow: hidden; margin-top: 0.75rem; }
+  .artifact-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
+  .artifact-filename { font-size: 12px; font-weight: 500; color: var(--text-secondary); font-family: 'SF Mono', 'Fira Code', monospace; }
+  .artifact-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+  .artifact-row { display: flex; gap: 12px; padding: 9px 14px; border-bottom: 0.5px solid var(--border); align-items: baseline; }
+  .artifact-row:last-child { border-bottom: none; }
+  .row-field { font-size: 12px; font-weight: 500; color: var(--text-muted); min-width: 160px; flex-shrink: 0; }
+  .row-value { font-size: 12px; color: var(--text-primary); line-height: 1.5; }
+
+  /* Impact cards */
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 0.5rem; }
+  .impact-card { background: var(--bg); border-radius: 8px; padding: 1rem 1.1rem; }
+  .impact-icon { font-size: 18px; margin-bottom: 8px; }
+  .impact-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .impact-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* Future items */
+  .future-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
+  .future-item { display: flex; gap: 14px; padding: 13px 15px; border: 0.5px solid var(--border); border-radius: 10px; background: var(--surface); }
+  .future-badge { flex-shrink: 0; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px; height: fit-content; margin-top: 2px; white-space: nowrap; }
+  .badge-soon { background: var(--accent-light); color: var(--accent); }
+  .badge-idea { background: #EEEDFE; color: #534AB7; }
+  .future-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .future-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* Footer */
+  footer { border-top: 0.5px solid var(--border); padding: 2rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+  .footer-name { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--text-secondary); }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.45s ease both 0.05s; }
+  .hero-title    { animation: fadeUp 0.45s ease both 0.12s; }
+  .hero-subtitle { animation: fadeUp 0.45s ease both 0.2s; }
+  .meta-row      { animation: fadeUp 0.45s ease both 0.28s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 0 2.5rem; }
+    .artifact-row { flex-direction: column; gap: 2px; }
+    .row-field { min-width: unset; }
+    .doc-section { flex-direction: column; gap: 2px; }
+    .doc-section-name { min-width: unset; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="nav-name" href="../index.html">Katie May</a>
+    <a class="nav-back" href="../index.html">← All projects</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <p class="hero-eyebrow">Deal management · Meeting prep</p>
+    <h1 class="hero-title">Pre-meeting prep brief</h1>
+    <p class="hero-subtitle">A one-page briefing document generated before every customer call, pulling from meeting history, opportunity context, lead signals, and recent account news.</p>
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-label">Built with</span><span class="meta-value">Granola API · Claude skill · Web search</span></div>
+      <div class="meta-item"><span class="meta-label">Output</span><span class="meta-value">Word document (.docx)</span></div>
+      <div class="meta-item"><span class="meta-label">First run</span><span class="meta-value">April 14, 2026</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label problem">Problem</div>
+    <p class="body-text">Walking into a customer meeting unprepared is one of the easiest ways to lose credibility. But proper prep takes real time — scanning back through old meeting notes, remembering what you committed to last time, pulling up recent company news, and figuring out what questions to ask next. Most reps skip it when calendars are packed, or they do a surface-level scan that misses the details that actually matter. The result is meetings that feel reactive rather than consultative, and discovery gaps that stay open for weeks longer than they should.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label solution">Solution</div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Flexible triggering.</strong> The skill responds to natural language — "prep me for my meetings today", "I have a meeting with David at Moody's, help me prep", or "what do I need to know before my Newton call". It identifies the right meeting from Granola, and if Granola has no calendar data, it falls back to meeting history and asks for any details it needs rather than failing silently.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Multi-source synthesis.</strong> The skill pulls from every relevant data source in the stack: full Granola meeting history for the account, the opportunity doc (if one exists and is relevant to this meeting), lead list signals for the contact, and a targeted web search for recent account news. Sources are only included if they add something real — empty sections are omitted rather than padded.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Opportunity-aware discovery questions.</strong> If an opportunity doc exists for the account, the skill surfaces which Discovery Capture Sheet fields are still marked Unknown and maps each one to a specific question to ask in the meeting. It turns gaps in the CRM into a concrete agenda item rather than leaving them invisible.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Editable Word doc output.</strong> The brief is output as a .docx file so the rep can take notes directly in the document, annotate it before the call, or share it with an SE or manager. A rep could print it and walk in with it, or open it on a second monitor during the meeting.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Multi-meeting support.</strong> When "prep me for today" returns more than one customer call, the skill asks whether to generate one combined document or a separate brief per meeting — then delivers whichever format the rep requests.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Data sources</div>
+    <div class="sources-grid">
+      <div class="source-card">
+        <div class="source-icon">📝</div>
+        <div class="source-title">Granola meeting history</div>
+        <div class="source-desc">All prior notes for the account, synthesized across the full relationship — not just the last meeting.</div>
+      </div>
+      <div class="source-card">
+        <div class="source-icon">📄</div>
+        <div class="source-title">Opportunity doc</div>
+        <div class="source-desc">Sales motion, use case, current/future state, 3 Why's status, and Unknown discovery fields — if a relevant opp doc exists.</div>
+      </div>
+      <div class="source-card">
+        <div class="source-icon">🎯</div>
+        <div class="source-title">Lead list signals</div>
+        <div class="source-desc">Contact tier, score rationale, and signals (new to role, AI title, data mandate) if the contact appeared in a prior lead list.</div>
+      </div>
+      <div class="source-card">
+        <div class="source-icon">🔍</div>
+        <div class="source-title">Web search</div>
+        <div class="source-desc">2-3 bullets of recent account news from the last 30 days only. Omitted entirely if nothing material is found.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Document structure</div>
+    <div class="doc-preview">
+      <div class="doc-preview-header">
+        <span class="doc-preview-title">PrepBrief_[Account]_[YYYY-MM-DD].docx</span>
+        <span class="doc-preview-badge">Editable · Note-friendly</span>
+      </div>
+      <div class="doc-section">
+        <span class="doc-section-name">Who you're meeting</span>
+        <span class="doc-section-desc">Name, title, time in role, lead list tier and score, key signals</span>
+      </div>
+      <div class="doc-section">
+        <span class="doc-section-name">Where we left off</span>
+        <span class="doc-section-desc">Relationship summary, open action items (Katie's and theirs), recurring themes across meetings</span>
+      </div>
+      <div class="doc-section">
+        <span class="doc-section-name">Opportunity status</span>
+        <span class="doc-section-desc">Sales motion, product type, use case, what we know, what's still unknown, 3 Why's status</span>
+      </div>
+      <div class="doc-section">
+        <span class="doc-section-name">Recent account news</span>
+        <span class="doc-section-desc">2-3 bullets max, last 30 days only. Omitted if nothing material found.</span>
+      </div>
+      <div class="doc-section">
+        <span class="doc-section-name">Recommended topics</span>
+        <span class="doc-section-desc">Open-ended suggestions based on deal stage, plus specific discovery questions mapped to Unknown opp doc fields</span>
+      </div>
+      <div class="doc-section">
+        <span class="doc-section-name">Notes</span>
+        <span class="doc-section-desc">Blank — for the rep to fill in during or before the call</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Sample output — Marsh McLennan Newton migration call</div>
+    <div class="artifact-preview">
+      <div class="artifact-header">
+        <span class="artifact-filename">PrepBrief_MarshNewton_2026-04-14.docx</span>
+        <span class="artifact-badge">Generated in ~15s</span>
+      </div>
+      <div class="artifact-row"><span class="row-field">Account</span><span class="row-value">Marsh McLennan — Newton workflow automation system</span></div>
+      <div class="artifact-row"><span class="row-field">Meeting</span><span class="row-value">MongoDB performance insights and Atlas migration session · April 14, 2026 · 12:30 PM ET</span></div>
+      <div class="artifact-row"><span class="row-field">Sources pulled</span><span class="row-value">Granola history (Apr 1 PS scoping + Apr 14 notes) · Opportunity doc · Web search</span></div>
+      <div class="artifact-row"><span class="row-field">Open action items surfaced</span><span class="row-value">6 — 4 owned by MongoDB/Katie, 2 owned by Kishore's team</span></div>
+      <div class="artifact-row"><span class="row-field">Unknown fields flagged</span><span class="row-value">3 — MongoSync restart status, Atlas production readiness, April 18-25 target viability</span></div>
+      <div class="artifact-row"><span class="row-field">Discovery questions generated</span><span class="row-value">3 specific questions mapped directly to each Unknown field</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label impact">Impact</div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">⏱</div>
+        <div class="impact-title">Prep time eliminated</div>
+        <div class="impact-desc">What used to take 20 to 30 minutes of scanning notes, emails, and LinkedIn takes 15 seconds to generate.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🎯</div>
+        <div class="impact-title">Nothing falls through the cracks</div>
+        <div class="impact-desc">Open action items from prior meetings are surfaced automatically — no more starting a call and realizing you forgot to follow up on something.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🧭</div>
+        <div class="impact-title">Discovery gaps become an agenda</div>
+        <div class="impact-desc">Unknown fields from the opp doc are converted into specific questions to ask, so every meeting moves the deal forward rather than covering ground already covered.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">📝</div>
+        <div class="impact-title">Built for how reps actually work</div>
+        <div class="impact-desc">A Word doc the rep can annotate, print, or open alongside a Zoom call — not a dashboard they have to navigate mid-meeting.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label future">How we could continue building on this</div>
+    <div class="future-grid">
+      <div class="future-item">
+        <span class="future-badge badge-soon">Next up</span>
+        <div>
+          <div class="future-title">Account health tracker</div>
+          <div class="future-desc">The prep brief is a point-in-time snapshot. The next step is a living view of the deal that synthesizes all meetings over time and surfaces what's changed, what's stalled, and what the recommended next action is.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-soon">Next up</span>
+        <div>
+          <div class="future-title">Automated morning push via Zapier</div>
+          <div class="future-desc">Rather than prompting the skill manually, a Zapier automation fires every morning, generates briefs for the day's customer calls, and emails them before the rep's first meeting — no prompt required.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">Salesforce opportunity integration</div>
+          <div class="future-desc">Pull stage, close date, ARR, and activity history directly from Salesforce to enrich the opportunity status section — without the rep having to manually maintain an opp doc.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">Email thread context</div>
+          <div class="future-desc">Surface tone and relationship signals from prior email exchanges with the contact — helpful for understanding where the relationship stands beyond what meeting notes capture.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">ICP feedback loop</div>
+          <div class="future-desc">After each meeting, log the outcome and use it to refine lead scoring over time — so the contacts who most often lead to productive meetings get surfaced higher on future lead lists.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrapper">
+  <footer>
+    <span class="footer-name">Katie May</span>
+    <span class="footer-note">Built with Claude · Updated April 2026</span>
+  </footer>
+</div>
+
+</body>
+</html>
