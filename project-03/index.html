@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalized Outreach Drafting — Katie May</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --text-primary: #1A1916;
+    --text-secondary: #6B6860;
+    --text-muted: #A8A59F;
+    --accent: #1D6B4A;
+    --accent-light: #E4F0EB;
+    --border: rgba(26,25,22,0.1);
+    --border-strong: rgba(26,25,22,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .wrapper { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.25rem 0;
+    position: sticky; top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .nav-name { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--text-primary); text-decoration: none; }
+  .nav-back { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--text-primary); }
+
+  .hero { padding: 5rem 0 3.5rem; border-bottom: 0.5px solid var(--border); }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 5vw, 48px); line-height: 1.1; color: var(--text-primary); margin-bottom: 0.75rem; }
+  .hero-subtitle { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.65; max-width: 560px; margin-bottom: 2rem; }
+
+  .meta-row { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 3px; }
+  .meta-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .meta-value { font-size: 13px; color: var(--text-primary); }
+
+  .divider { height: 0.5px; background: var(--border); margin: 2.5rem 0; }
+
+  .section { margin-bottom: 2.5rem; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border); }
+  .section-label.problem { color: #D85A30; }
+  .section-label.solution { color: #185FA5; }
+  .section-label.impact { color: #3B6D11; }
+  .section-label.future { color: #7F77DD; }
+  .section-label.muted { color: var(--text-muted); }
+
+  .body-text { font-size: 15px; color: var(--text-primary); line-height: 1.75; }
+
+  .step-list { display: flex; flex-direction: column; gap: 14px; margin-top: 0.5rem; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #E6F1FB; color: #185FA5; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+  .step-text { font-size: 15px; color: var(--text-primary); line-height: 1.65; }
+  .step-text strong { font-weight: 500; }
+
+  /* Hook priority */
+  .hook-list { display: flex; flex-direction: column; gap: 8px; margin-top: 0.75rem; }
+  .hook-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 14px; background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 8px; }
+  .hook-rank { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .hook-rank.two { background: #185FA5; }
+  .hook-rank.three { background: #7F77DD; }
+  .hook-rank.four { background: var(--text-muted); }
+  .hook-content { flex: 1; }
+  .hook-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
+  .hook-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* Message examples */
+  .message-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 0.75rem; }
+  .message-card { border: 0.5px solid var(--border-strong); border-radius: 10px; overflow: hidden; }
+  .message-header { padding: 10px 14px; background: var(--bg); border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .message-contact { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+  .message-signal { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+  .message-body { padding: 14px; background: var(--surface); }
+  .message-channel { font-size: 10px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .message-subject { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
+  .message-text { font-size: 13px; color: var(--text-primary); line-height: 1.65; white-space: pre-wrap; }
+  .message-divider { height: 0.5px; background: var(--border); margin: 12px 0; }
+
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 0.5rem; }
+  .impact-card { background: var(--bg); border-radius: 8px; padding: 1rem 1.1rem; }
+  .impact-icon { font-size: 18px; margin-bottom: 8px; }
+  .impact-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .impact-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+  .future-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
+  .future-item { display: flex; gap: 14px; padding: 13px 15px; border: 0.5px solid var(--border); border-radius: 10px; background: var(--surface); }
+  .future-badge { flex-shrink: 0; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px; height: fit-content; margin-top: 2px; white-space: nowrap; }
+  .badge-soon { background: var(--accent-light); color: var(--accent); }
+  .badge-idea { background: #EEEDFE; color: #534AB7; }
+  .future-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .future-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  footer { border-top: 0.5px solid var(--border); padding: 2rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+  .footer-name { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--text-secondary); }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.45s ease both 0.05s; }
+  .hero-title    { animation: fadeUp 0.45s ease both 0.12s; }
+  .hero-subtitle { animation: fadeUp 0.45s ease both 0.2s; }
+  .meta-row      { animation: fadeUp 0.45s ease both 0.28s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 0 2.5rem; }
+    .message-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="nav-name" href="../index.html">Katie May</a>
+    <a class="nav-back" href="../index.html">← All projects</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <p class="hero-eyebrow">Outreach · Prospecting</p>
+    <h1 class="hero-title">Personalized outreach drafting</h1>
+    <p class="hero-subtitle">Cold emails and LinkedIn messages that sound like a human wrote them — because the signal research is real, the voice is consistent, and the hook is specific to each contact.</p>
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-label">Built with</span><span class="meta-value">Claude skill · ZoomInfo · Web search</span></div>
+      <div class="meta-item"><span class="meta-label">Output</span><span class="meta-value">Inline drafts or appended to lead list</span></div>
+      <div class="meta-item"><span class="meta-label">First run</span><span class="meta-value">April 2026</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label problem">Problem</div>
+    <p class="body-text">Most cold outreach fails before it's read. Generic openers, feature dumps, and templated subject lines signal immediately that nobody did their homework. Reps know this — so they either spend 20 minutes researching each contact before writing, or they send something generic and hope for the best. Neither scales. The research takes too long to do manually for every contact on a list, and the generic approach wastes the list entirely.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label solution">Solution</div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Signal-first research.</strong> Before writing a single word, the skill pulls everything available on the contact: lead list score rationale, ZoomInfo enrichment, LinkedIn profile details, and recent company news. It looks for something specific — an accomplishment they highlighted, a tool they mentioned, an initiative they're running — and builds the message around that.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Prioritized hook selection.</strong> Not all signals are equal. The skill ranks available hooks and leads with the strongest one automatically. An AI or ML mandate in someone's title beats a recent role change, which beats a company announcement, which beats a generic industry angle. The message always opens with the most specific, relevant hook available.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Consistent voice, every time.</strong> The skill is trained on real outreach examples that have generated replies — capturing a specific style: warm but direct, curious not pushy, short enough to read without scrolling on a phone. Every draft passes a voice check before output. No em dashes, no "I'd love to connect," no feature lists in a first message.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Account-aware context.</strong> When MongoDB is already deployed at an account, the skill knows. Instead of pitching cold, messages reference that other teams are already running on Atlas and offer to share what they are seeing. This turns a cold outreach into something closer to a peer referral.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Flexible output.</strong> For 1 to 5 contacts, drafts appear inline in chat for immediate copy-paste. For larger batches, the skill appends email and LinkedIn draft columns directly to the existing lead list spreadsheet so everything stays in one place.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Hook priority order</div>
+    <div class="hook-list">
+      <div class="hook-item">
+        <div class="hook-rank">1</div>
+        <div class="hook-content">
+          <div class="hook-title">AI or ML keyword in title</div>
+          <div class="hook-desc">They are actively building or owning AI and data work. Lead with genuine curiosity about what they are building. Never assume they know the product.</div>
+        </div>
+      </div>
+      <div class="hook-item">
+        <div class="hook-rank two">2</div>
+        <div class="hook-content">
+          <div class="hook-title">New to role in last 6 months</div>
+          <div class="hook-desc">New leaders evaluate vendors early and move fast. Acknowledge the new chapter naturally, without making it feel like a trigger you found in a database.</div>
+        </div>
+      </div>
+      <div class="hook-item">
+        <div class="hook-rank three">3</div>
+        <div class="hook-content">
+          <div class="hook-title">Company-level announcement</div>
+          <div class="hook-desc">Recent news, product launch, AI initiative, or funding round. Connect it to a relevant capability rather than just mentioning you saw the news.</div>
+        </div>
+      </div>
+      <div class="hook-item">
+        <div class="hook-rank four">4</div>
+        <div class="hook-content">
+          <div class="hook-title">Generic signal</div>
+          <div class="hook-desc">Default to Atlas Database angle or an open "what are you building" question. Never fabricate specificity that does not exist.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label muted">Sample output — large financial services firm, enterprise accounts</div>
+    <div class="message-grid">
+
+      <div class="message-card">
+        <div class="message-header">
+          <span class="message-contact">VP, Endpoint Engineering · Large financial services firm</span>
+          <span class="message-signal">Hook: LinkedIn profile research</span>
+        </div>
+        <div class="message-body">
+          <div class="message-channel">Email</div>
+          <div class="message-subject">Subject: AI and telemetry at [Company]</div>
+          <div class="message-text">Hi [Name], great to connect. Saw you've been driving AI automation and telemetry-based monitoring across a large device fleet. Curious how you're handling the data layer behind those workflows — a few other teams here are already running on MongoDB Atlas and I'd love to share what they're seeing. Is that a conversation worth having?
+
+Katie</div>
+          <div class="message-divider"></div>
+          <div class="message-channel">LinkedIn</div>
+          <div class="message-text">Hi [Name], great to connect. Noticed you've been building out AI automation and proactive telemetry at scale — curious whether the data infrastructure behind that is something you're evaluating as the fleet grows. Happy to share what other teams here are doing on that front.
+
+Katie</div>
+        </div>
+      </div>
+
+      <div class="message-card">
+        <div class="message-header">
+          <span class="message-contact">Director, Database Engineering · Large financial services firm</span>
+          <span class="message-signal">Hook: Role title + company AI context</span>
+        </div>
+        <div class="message-body">
+          <div class="message-channel">Email</div>
+          <div class="message-subject">Subject: Database layer at [Company]</div>
+          <div class="message-text">Hi [Name], great to connect. As the person owning database engineering here, you're probably at the center of a lot of the infrastructure conversations as the company scales its GenAI platform. A few teams are already running on MongoDB Atlas and I'd love to share what they're seeing. Curious if that's a conversation worth having?
+
+Katie</div>
+          <div class="message-divider"></div>
+          <div class="message-channel">LinkedIn</div>
+          <div class="message-text">Hi [Name], great to connect. Sounds like you're at the center of the data infrastructure decisions as the AI buildout accelerates. A few teams here are already on Atlas and I'd be happy to share what they're doing. Is that useful context?
+
+Katie</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label impact">Impact</div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">⏱</div>
+        <div class="impact-title">Research time eliminated</div>
+        <div class="impact-desc">20 minutes of manual LinkedIn research per contact replaced by automated signal gathering before the first word is written.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🎯</div>
+        <div class="impact-title">Every message is specific</div>
+        <div class="impact-desc">The hook is always grounded in something real about the contact. No generic openers, no mail-merge feel, no feature dumps in a first message.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🔁</div>
+        <div class="impact-title">Consistent voice at scale</div>
+        <div class="impact-desc">Whether drafting 1 message or 20, the tone, length, and style are identical. The rep's voice is codified into the skill, not approximated each time.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">📋</div>
+        <div class="impact-title">Feeds directly into the lead list</div>
+        <div class="impact-desc">For batch runs, email and LinkedIn drafts are appended as new columns to the existing spreadsheet so everything stays in one place.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label future">How we could continue building on this</div>
+    <div class="future-grid">
+      <div class="future-item">
+        <span class="future-badge badge-soon">Next up</span>
+        <div>
+          <div class="future-title">Full sequence generation</div>
+          <div class="future-desc">Extend beyond the first message to generate a full 3-touch sequence — initial outreach, a follow-up adding a new proof point, and a break-up email — timed and ready to load into SalesLoft.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-soon">Next up</span>
+        <div>
+          <div class="future-title">Direct SalesLoft push</div>
+          <div class="future-desc">Skip the copy-paste entirely. Once drafts are approved, push them directly into a SalesLoft cadence with one confirmation step.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">Reply detection and follow-up drafting</div>
+          <div class="future-desc">When a contact replies, automatically draft a contextual follow-up that picks up exactly where the conversation left off, grounded in the original signal and whatever they said back.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">A/B subject line variants</div>
+          <div class="future-desc">Generate two subject line options per email with different angles, track which one gets better open rates over time, and feed that data back into the hook selection logic.</div>
+        </div>
+      </div>
+      <div class="future-item">
+        <span class="future-badge badge-idea">Idea</span>
+        <div>
+          <div class="future-title">Voice customization per rep</div>
+          <div class="future-desc">The current voice guide is specific to one rep's style. Extending this to other sellers on the team would require a brief onboarding step — share two or three messages that landed well and the skill captures the pattern.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrapper">
+  <footer>
+    <span class="footer-name">Katie May</span>
+    <span class="footer-note">Built with Claude · Updated April 2026</span>
+  </footer>
+</div>
+
+</body>
+</html>
