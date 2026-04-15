@@ -3,99 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Automation Portfolio</title>
+<title>Automated Opportunity Documentation — Katie May</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f9f7; color: #1a1a18; line-height: 1.7; }
-  .page { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --text-primary: #1A1916;
+    --text-secondary: #6B6860;
+    --text-muted: #A8A59F;
+    --accent: #1D6B4A;
+    --accent-light: #E4F0EB;
+    --border: rgba(26,25,22,0.1);
+    --border-strong: rgba(26,25,22,0.18);
+  }
 
-  .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; padding-bottom: 1rem; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
-  .site-title { font-size: 12px; font-weight: 500; color: #888; letter-spacing: 0.06em; text-transform: uppercase; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 6px; background: #E1F5EE; color: #0F6E56; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .project-eyebrow { font-size: 12px; font-weight: 500; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .project-title { font-size: 28px; font-weight: 500; color: #1a1a18; line-height: 1.25; margin-bottom: 0.75rem; }
-  .project-subtitle { font-size: 16px; color: #555; line-height: 1.6; margin-bottom: 2rem; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
 
-  .meta-row { display: flex; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .wrapper { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.25rem 0;
+    position: sticky; top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .nav-name { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--text-primary); text-decoration: none; }
+  .nav-back { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--text-primary); }
+
+  .hero { padding: 5rem 0 3.5rem; border-bottom: 0.5px solid var(--border); }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 5vw, 48px); line-height: 1.1; color: var(--text-primary); margin-bottom: 0.75rem; }
+  .hero-subtitle { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.65; max-width: 560px; margin-bottom: 2rem; }
+
+  .meta-row { display: flex; gap: 2rem; flex-wrap: wrap; }
   .meta-item { display: flex; flex-direction: column; gap: 3px; }
-  .meta-label { font-size: 11px; font-weight: 500; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
-  .meta-value { font-size: 13px; color: #1a1a18; }
+  .meta-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .meta-value { font-size: 13px; color: var(--text-primary); }
 
-  .divider { height: 0.5px; background: rgba(0,0,0,0.1); margin: 2.5rem 0; }
+  .divider { height: 0.5px; background: var(--border); margin: 2.5rem 0; }
 
   .section { margin-bottom: 2.5rem; }
-  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border); }
   .section-label.problem { color: #D85A30; }
   .section-label.solution { color: #185FA5; }
   .section-label.impact { color: #3B6D11; }
-  .section-label.future { color: #534AB7; }
-  .section-label.muted { color: #888; }
+  .section-label.future { color: #7F77DD; }
+  .section-label.muted { color: var(--text-muted); }
 
-  .body-text { font-size: 15px; color: #1a1a18; line-height: 1.75; }
+  .body-text { font-size: 15px; color: var(--text-primary); line-height: 1.75; }
 
   .step-list { display: flex; flex-direction: column; gap: 14px; margin-top: 0.5rem; }
   .step { display: flex; gap: 14px; align-items: flex-start; }
   .step-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #E6F1FB; color: #185FA5; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
-  .step-text { font-size: 15px; color: #1a1a18; line-height: 1.65; }
+  .step-text { font-size: 15px; color: var(--text-primary); line-height: 1.65; }
   .step-text strong { font-weight: 500; }
 
-  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 0.5rem; }
-  .impact-card { background: #f3f3f0; border-radius: 8px; padding: 1rem 1.1rem; }
-  .impact-icon { font-size: 18px; margin-bottom: 8px; }
-  .impact-title { font-size: 13px; font-weight: 500; color: #1a1a18; margin-bottom: 4px; }
-  .impact-desc { font-size: 12px; color: #666; line-height: 1.55; }
-
-  .artifact-preview { border: 0.5px solid rgba(0,0,0,0.12); border-radius: 10px; overflow: hidden; margin-top: 0.75rem; }
-  .artifact-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f3f3f0; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
-  .artifact-filename { font-size: 12px; font-weight: 500; color: #666; font-family: 'SF Mono', 'Fira Code', monospace; }
-  .artifact-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: #E1F5EE; color: #0F6E56; }
-  .artifact-row { display: flex; gap: 12px; padding: 9px 14px; border-bottom: 0.5px solid rgba(0,0,0,0.07); align-items: baseline; }
+  .artifact-preview { border: 0.5px solid var(--border-strong); border-radius: 10px; overflow: hidden; margin-top: 0.75rem; }
+  .artifact-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
+  .artifact-filename { font-size: 12px; font-weight: 500; color: var(--text-secondary); font-family: 'SF Mono', 'Fira Code', monospace; }
+  .artifact-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+  .artifact-row { display: flex; gap: 12px; padding: 9px 14px; border-bottom: 0.5px solid var(--border); align-items: baseline; }
   .artifact-row:last-child { border-bottom: none; }
-  .row-field { font-size: 12px; font-weight: 500; color: #888; min-width: 160px; flex-shrink: 0; }
-  .row-value { font-size: 12px; color: #1a1a18; line-height: 1.5; }
+  .row-field { font-size: 12px; font-weight: 500; color: var(--text-muted); min-width: 160px; flex-shrink: 0; }
+  .row-value { font-size: 12px; color: var(--text-primary); line-height: 1.5; }
+
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 0.5rem; }
+  .impact-card { background: var(--bg); border-radius: 8px; padding: 1rem 1.1rem; }
+  .impact-icon { font-size: 18px; margin-bottom: 8px; }
+  .impact-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .impact-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
 
   .future-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
-  .future-item { display: flex; gap: 14px; padding: 13px 15px; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; background: #fff; }
+  .future-item { display: flex; gap: 14px; padding: 13px 15px; border: 0.5px solid var(--border); border-radius: 10px; background: var(--surface); }
   .future-badge { flex-shrink: 0; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px; height: fit-content; margin-top: 2px; white-space: nowrap; }
-  .badge-soon { background: #E1F5EE; color: #0F6E56; }
+  .badge-soon { background: var(--accent-light); color: var(--accent); }
   .badge-idea { background: #EEEDFE; color: #534AB7; }
-  .future-title { font-size: 14px; font-weight: 500; color: #1a1a18; margin-bottom: 4px; }
-  .future-desc { font-size: 13px; color: #666; line-height: 1.55; }
+  .future-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .future-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  footer { border-top: 0.5px solid var(--border); padding: 2rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+  .footer-name { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--text-secondary); }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.45s ease both 0.05s; }
+  .hero-title    { animation: fadeUp 0.45s ease both 0.12s; }
+  .hero-subtitle { animation: fadeUp 0.45s ease both 0.2s; }
+  .meta-row      { animation: fadeUp 0.45s ease both 0.28s; }
 
   @media (max-width: 600px) {
-    .page { padding: 1.5rem 1.25rem 4rem; }
-    .project-title { font-size: 22px; }
-    .meta-row { gap: 1rem; }
+    .hero { padding: 3rem 0 2.5rem; }
     .artifact-row { flex-direction: column; gap: 2px; }
     .row-field { min-width: unset; }
   }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="site-header">
-    <span class="site-title">Automation portfolio</span>
-    <span class="tag">Project 01</span>
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="nav-name" href="../index.html">Katie May</a>
+    <a class="nav-back" href="../index.html">← All projects</a>
   </div>
+</nav>
 
-  <div class="project-eyebrow">Sales operations · Marsh McLennan</div>
-  <h1 class="project-title">Automated opportunity documentation from meeting notes</h1>
-  <p class="project-subtitle">Turning Granola meeting transcripts into fully structured Salesforce opportunity briefs, automatically, in seconds.</p>
+<div class="wrapper">
 
-  <div class="meta-row">
-    <div class="meta-item"><span class="meta-label">Built with</span><span class="meta-value">Granola API · Claude · docx</span></div>
-    <div class="meta-item"><span class="meta-label">Output</span><span class="meta-value">Word document (.docx)</span></div>
-    <div class="meta-item"><span class="meta-label">Accounts</span><span class="meta-value">Marsh McLennan · Moody's</span></div>
-    <div class="meta-item"><span class="meta-label">First run</span><span class="meta-value">April 6, 2026</span></div>
-  </div>
+  <section class="hero">
+    <p class="hero-eyebrow">Sales operations · CRM hygiene</p>
+    <h1 class="hero-title">Automated opportunity documentation</h1>
+    <p class="hero-subtitle">Turning meeting transcripts into fully structured Salesforce opportunity briefs, automatically, in seconds.</p>
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-label">Built with</span><span class="meta-value">Granola API · Claude skill · Word doc</span></div>
+      <div class="meta-item"><span class="meta-label">Output</span><span class="meta-value">Word document (.docx)</span></div>
+      <div class="meta-item"><span class="meta-label">First run</span><span class="meta-value">April 2026</span></div>
+    </div>
+  </section>
 
   <div class="divider"></div>
 
   <div class="section">
     <div class="section-label problem">Problem</div>
-    <p class="body-text">Sales reps are notoriously bad at Salesforce hygiene, and it's not really their fault. After a high-stakes customer meeting, the last thing anyone wants to do is spend 30 to 45 minutes filling out opportunity fields from memory. The result: incomplete records, outdated discovery notes, and leadership flying blind on deal status. Yet accurate opportunity documentation is critical for forecasting, deal reviews, SE handoffs, and keeping the entire revenue team aligned on what's actually happening in a deal.</p>
+    <p class="body-text">Sales reps are notoriously bad at Salesforce hygiene, and it is not really their fault. After a high-stakes customer meeting, the last thing anyone wants to do is spend 30 to 45 minutes filling out opportunity fields from memory. The result is incomplete records, outdated discovery notes, and leadership flying blind on deal status. Yet accurate opportunity documentation is critical for forecasting, deal reviews, SE handoffs, and keeping the entire revenue team aligned on what is actually happening in a deal.</p>
   </div>
 
   <div class="section">
@@ -111,27 +152,27 @@
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-text"><strong>Structured output generated automatically.</strong> Claude reads all relevant meeting notes for an opportunity, extracts and synthesizes every required field (opportunity name, sales motion, product type, discovery capture sheet, 3 Why's) and outputs a clean, formatted Word document ready to share or paste into Salesforce.</div>
+        <div class="step-text"><strong>Structured output generated automatically.</strong> Claude reads all relevant meeting notes for an opportunity, extracts and synthesizes every required field including opportunity name, sales motion, product type, discovery capture sheet, and 3 Why's, then outputs a clean formatted Word document ready to share or paste into Salesforce.</div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
-        <div class="step-text"><strong>Human review, not human labor.</strong> The rep's job shifts from writing to reviewing. Unknown fields are flagged explicitly — nothing is fabricated. The rep spends minutes reviewing instead of 30+ minutes writing from scratch.</div>
+        <div class="step-text"><strong>Human review, not human labor.</strong> The rep's job shifts from writing to reviewing. Unknown fields are flagged explicitly and nothing is fabricated. The rep spends minutes reviewing instead of 30 or more minutes writing from scratch.</div>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-label muted">Sample output — Marsh Flow NBM (Apr 2, 2026)</div>
+    <div class="section-label muted">Sample output — workflow automation platform, large financial services firm</div>
     <div class="artifact-preview">
       <div class="artifact-header">
-        <span class="artifact-filename">Marsh_Flow_Opportunity.docx</span>
+        <span class="artifact-filename">Opportunity_Brief_[Account]_[Project].docx</span>
         <span class="artifact-badge">Generated in ~8s</span>
       </div>
-      <div class="artifact-row"><span class="row-field">Opportunity name</span><span class="row-value">Marsh | Marsh Flow | Template Search &amp; Workflow Automation</span></div>
-      <div class="artifact-row"><span class="row-field">Sales motion</span><span class="row-value">Launch — MongoDB already selected as golden path technology</span></div>
+      <div class="artifact-row"><span class="row-field">Opportunity name</span><span class="row-value">[Account] | [Line of Business] | Workflow Automation Platform</span></div>
+      <div class="artifact-row"><span class="row-field">Sales motion</span><span class="row-value">Launch — database already selected as the platform standard</span></div>
       <div class="artifact-row"><span class="row-field">Product type</span><span class="row-value">Atlas Database · Vector Search · Voyage AI</span></div>
       <div class="artifact-row"><span class="row-field">Value drivers</span><span class="row-value">Accelerate time to value · Maximize competitive advantage</span></div>
-      <div class="artifact-row"><span class="row-field">Sections generated</span><span class="row-value">Opportunity fields · Discovery capture sheet · Granola notes · 3 Why's</span></div>
+      <div class="artifact-row"><span class="row-field">Sections generated</span><span class="row-value">Opportunity fields · Discovery capture sheet · Meeting notes · 3 Why's</span></div>
     </div>
   </div>
 
@@ -153,12 +194,12 @@
       <div class="impact-card">
         <div class="impact-icon">🎯</div>
         <div class="impact-title">Discovery quality</div>
-        <div class="impact-desc">Structured frameworks (3 Why's, value drivers, current/future state) applied automatically. No field left to chance.</div>
+        <div class="impact-desc">Structured frameworks including the 3 Why's, value drivers, and current and future state applied automatically. No field left to chance.</div>
       </div>
       <div class="impact-card">
         <div class="impact-icon">🔁</div>
         <div class="impact-title">Repeatability</div>
-        <div class="impact-desc">Same output quality whether it's the first meeting of the quarter or the thirtieth. No cognitive load required.</div>
+        <div class="impact-desc">Same output quality whether it is the first meeting of the quarter or the thirtieth. No cognitive load required.</div>
       </div>
     </div>
   </div>
@@ -186,26 +227,27 @@
         <span class="future-badge badge-idea">Idea</span>
         <div>
           <div class="future-title">Deal progression tracker</div>
-          <div class="future-desc">Synthesize all meetings for an opportunity over time and automatically surface what's changed, what's been learned, and what's still unknown since the last update.</div>
-        </div>
-      </div>
-      <div class="future-item">
-        <span class="future-badge badge-idea">Idea</span>
-        <div>
-          <div class="future-title">Pre-meeting prep brief</div>
-          <div class="future-desc">The inverse of this skill: before a meeting, pull all prior Granola notes and Salesforce data and generate a one-page prep doc covering what's been discussed, open questions, and recommended next topics.</div>
+          <div class="future-desc">Synthesize all meetings for an opportunity over time and automatically surface what has changed, what has been learned, and what is still unknown since the last update.</div>
         </div>
       </div>
       <div class="future-item">
         <span class="future-badge badge-idea">Idea</span>
         <div>
           <div class="future-title">Multi-stakeholder mapping</div>
-          <div class="future-desc">Across all meetings for an account, automatically build a map of every contact mentioned: their role, their sentiment, their stated priorities, and how recently they've been engaged.</div>
+          <div class="future-desc">Across all meetings for an account, automatically build a map of every contact mentioned including their role, sentiment, stated priorities, and how recently they have been engaged.</div>
         </div>
       </div>
     </div>
   </div>
 
 </div>
+
+<div class="wrapper">
+  <footer>
+    <span class="footer-name">Katie May</span>
+    <span class="footer-note">Built with Claude · Updated April 2026</span>
+  </footer>
+</div>
+
 </body>
 </html>
