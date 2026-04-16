@@ -165,7 +165,7 @@
 
   <div class="section">
     <div class="section-label problem">Problem</div>
-    <p class="body-text">Walking into a customer meeting unprepared is one of the easiest ways to lose credibility. But proper prep takes real time — scanning back through old meeting notes, remembering what you committed to last time, pulling up recent company news, and figuring out what questions to ask next. Most reps skip it when calendars are packed, or they do a surface-level scan that misses the details that actually matter. The result is meetings that feel reactive rather than consultative, and discovery gaps that stay open for weeks longer than they should.</p>
+    <p class="body-text">Walking into a customer meeting unprepared is one of the easiest ways to lose credibility. But proper prep takes real time: scanning back through old meeting notes, remembering what you committed to last time, pulling up recent company news, and figuring out what questions to ask next. Most reps skip it when calendars are packed, or they do a surface-level scan that misses the details that actually matter. The result is meetings that feel reactive rather than consultative, and discovery gaps that stay open for weeks longer than they should.</p>
   </div>
 
   <div class="section">
@@ -173,11 +173,11 @@
     <div class="step-list">
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-text"><strong>Flexible triggering.</strong> The skill responds to natural language — "prep me for my meetings today", "I have a meeting with David at Moody's, help me prep", or "what do I need to know before my Newton call". It identifies the right meeting from Granola, and if Granola has no calendar data, it falls back to meeting history and asks for any details it needs rather than failing silently.</div>
+        <div class="step-text"><strong>Flexible triggering.</strong> The skill responds to natural language. "Prep me for my meetings today", "I have a meeting with [name] at [account], help me prep", or "What do I need to know before my [account] call". It identifies the right meeting from Granola, and if Granola has no calendar data, it falls back to meeting history and asks for any details it needs rather than failing silently.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-text"><strong>Multi-source synthesis.</strong> The skill pulls from every relevant data source in the stack: full Granola meeting history for the account, the opportunity doc (if one exists and is relevant to this meeting), lead list signals for the contact, and a targeted web search for recent account news. Sources are only included if they add something real — empty sections are omitted rather than padded.</div>
+        <div class="step-text"><strong>Multi-source synthesis.</strong> The skill pulls from every relevant data source in the stack: full Granola meeting history for the account, the opportunity doc (if one exists and is relevant to this meeting), lead list signals for the contact, and a targeted web search for recent account news. Sources are only included if they add something real. Empty sections are omitted rather than padded.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
@@ -189,7 +189,7 @@
       </div>
       <div class="step">
         <div class="step-num">5</div>
-        <div class="step-text"><strong>Multi-meeting support.</strong> When "prep me for today" returns more than one customer call, the skill asks whether to generate one combined document or a separate brief per meeting — then delivers whichever format the rep requests.</div>
+        <div class="step-text"><strong>Multi-meeting support.</strong> When "prep me for today" returns more than one customer call, the skill asks whether to generate one combined document or a separate brief per meeting, then delivers whichever format the rep requests.</div>
       </div>
     </div>
   </div>
@@ -200,12 +200,12 @@
       <div class="source-card">
         <div class="source-icon">📝</div>
         <div class="source-title">Granola meeting history</div>
-        <div class="source-desc">All prior notes for the account, synthesized across the full relationship — not just the last meeting.</div>
+        <div class="source-desc">All prior notes for the account, synthesized across the full relationship, not just the last meeting.</div>
       </div>
       <div class="source-card">
         <div class="source-icon">📄</div>
         <div class="source-title">Opportunity doc</div>
-        <div class="source-desc">Sales motion, use case, current/future state, 3 Why's status, and Unknown discovery fields — if a relevant opp doc exists.</div>
+        <div class="source-desc">Sales motion, use case, current/future state, 3 Why's status, and Unknown discovery fields (if a relevant opp doc exists).</div>
       </div>
       <div class="source-card">
         <div class="source-icon">🎯</div>
@@ -233,7 +233,7 @@
       </div>
       <div class="doc-section">
         <span class="doc-section-name">Where we left off</span>
-        <span class="doc-section-desc">Relationship summary, open action items (Katie's and theirs), recurring themes across meetings</span>
+        <span class="doc-section-desc">Relationship summary, open action items (rep's and theirs), recurring themes across meetings</span>
       </div>
       <div class="doc-section">
         <span class="doc-section-name">Opportunity status</span>
@@ -249,23 +249,23 @@
       </div>
       <div class="doc-section">
         <span class="doc-section-name">Notes</span>
-        <span class="doc-section-desc">Blank — for the rep to fill in during or before the call</span>
+        <span class="doc-section-desc">Blank. For the rep to fill in during or before the call</span>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-label muted">Sample output — Marsh McLennan Newton migration call</div>
+    <div class="section-label muted">Sample output</div>
     <div class="artifact-preview">
       <div class="artifact-header">
-        <span class="artifact-filename">PrepBrief_MarshNewton_2026-04-14.docx</span>
+        <span class="artifact-filename">PrepBrief_[Account]_[YYYY-MM-DD].docx</span>
         <span class="artifact-badge">Generated in ~15s</span>
       </div>
-      <div class="artifact-row"><span class="row-field">Account</span><span class="row-value">Marsh McLennan — Newton workflow automation system</span></div>
-      <div class="artifact-row"><span class="row-field">Meeting</span><span class="row-value">MongoDB performance insights and Atlas migration session · April 14, 2026 · 12:30 PM ET</span></div>
+      <div class="artifact-row"><span class="row-field">Account</span><span class="row-value">[Account] — [Project Name]</span></div>
+      <div class="artifact-row"><span class="row-field">Meeting</span><span class="row-value">[Meeting Title] · April 14, 2026 · 12:30 PM ET</span></div>
       <div class="artifact-row"><span class="row-field">Sources pulled</span><span class="row-value">Granola history (Apr 1 PS scoping + Apr 14 notes) · Opportunity doc · Web search</span></div>
-      <div class="artifact-row"><span class="row-field">Open action items surfaced</span><span class="row-value">6 — 4 owned by MongoDB/Katie, 2 owned by Kishore's team</span></div>
-      <div class="artifact-row"><span class="row-field">Unknown fields flagged</span><span class="row-value">3 — MongoSync restart status, Atlas production readiness, April 18-25 target viability</span></div>
+      <div class="artifact-row"><span class="row-field">Open action items surfaced</span><span class="row-value">6 — 4 owned by rep, 2 owned by prospect</span></div>
+      <div class="artifact-row"><span class="row-field">Unknown fields flagged</span><span class="row-value">2 — product issue, April 18-25 target viability</span></div>
       <div class="artifact-row"><span class="row-field">Discovery questions generated</span><span class="row-value">3 specific questions mapped directly to each Unknown field</span></div>
     </div>
   </div>
@@ -283,7 +283,7 @@
       <div class="impact-card">
         <div class="impact-icon">🎯</div>
         <div class="impact-title">Nothing falls through the cracks</div>
-        <div class="impact-desc">Open action items from prior meetings are surfaced automatically — no more starting a call and realizing you forgot to follow up on something.</div>
+        <div class="impact-desc">Open action items from prior meetings are surfaced automatically. No more starting a call and realizing you forgot to follow up on something.</div>
       </div>
       <div class="impact-card">
         <div class="impact-icon">🧭</div>
@@ -293,7 +293,7 @@
       <div class="impact-card">
         <div class="impact-icon">📝</div>
         <div class="impact-title">Built for how reps actually work</div>
-        <div class="impact-desc">A Word doc the rep can annotate, print, or open alongside a Zoom call — not a dashboard they have to navigate mid-meeting.</div>
+        <div class="impact-desc">A Word doc the rep can annotate, print, or open alongside a Zoom call. Not a dashboard they have to navigate mid-meeting.</div>
       </div>
     </div>
   </div>
@@ -314,28 +314,28 @@
         <span class="future-badge badge-soon">Next up</span>
         <div>
           <div class="future-title">Automated morning push via Zapier</div>
-          <div class="future-desc">Rather than prompting the skill manually, a Zapier automation fires every morning, generates briefs for the day's customer calls, and emails them before the rep's first meeting — no prompt required.</div>
+          <div class="future-desc">Rather than prompting the skill manually, a Zapier automation fires every morning, generates briefs for the day's customer calls, and emails them before the rep's first meeting. No prompt required.</div>
         </div>
       </div>
       <div class="future-item">
         <span class="future-badge badge-idea">Idea</span>
         <div>
           <div class="future-title">Salesforce opportunity integration</div>
-          <div class="future-desc">Pull stage, close date, ARR, and activity history directly from Salesforce to enrich the opportunity status section — without the rep having to manually maintain an opp doc.</div>
+          <div class="future-desc">Pull stage, close date, ARR, and activity history directly from Salesforce to enrich the opportunity status section, without the rep having to manually maintain an opp doc.</div>
         </div>
       </div>
       <div class="future-item">
         <span class="future-badge badge-idea">Idea</span>
         <div>
           <div class="future-title">Email thread context</div>
-          <div class="future-desc">Surface tone and relationship signals from prior email exchanges with the contact — helpful for understanding where the relationship stands beyond what meeting notes capture.</div>
+          <div class="future-desc">Surface tone and relationship signals from prior email exchanges with the contact. Helpful for understanding where the relationship stands beyond what meeting notes capture.</div>
         </div>
       </div>
       <div class="future-item">
         <span class="future-badge badge-idea">Idea</span>
         <div>
           <div class="future-title">ICP feedback loop</div>
-          <div class="future-desc">After each meeting, log the outcome and use it to refine lead scoring over time — so the contacts who most often lead to productive meetings get surfaced higher on future lead lists.</div>
+          <div class="future-desc">After each meeting, log the outcome and use it to refine lead scoring over time, so the contacts who most often lead to productive meetings get surfaced higher on future lead lists.</div>
         </div>
       </div>
     </div>
